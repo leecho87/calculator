@@ -18,12 +18,12 @@
         calculatorButton : document.querySelectorAll('[data-value]')
     };
 
-    // 계산하는함수?
+    // 버튼 누를때 마다 호출 (dataModel 갱신 후 paint 호출하기)
     function calculator(e){
         var text = e.target.innerText;
         var value = e.target.dataset.value;
 
-        // value가 EQUAL같은 string이라 eval이 안됨..
+        // value가 EQUAL같은 string이라 eval이 안되는 걸 할려고 했네 멍충돋았음
         switch(value) {
             case "AC" :
                 dataModel.display = '0'
@@ -51,18 +51,18 @@
         return paint();
     }
 
-    // 합쳐서 그려주는 함수?
+    // 버튼 다 누르고 얘 실행해서 윈도우에 값 넣기
     function paint(){
         viewModel.calculatorWindow.value = dataModel.display;
     }
 
-    // 초기 이벤트 부여;
+    // 버튼마다 클릭함수 붙이기
     function init(){
         for(var i=0; i<viewModel.calculatorButton.length; i++){
             viewModel.calculatorButton[i].addEventListener('click', calculator)
         }
         return paint();
     }
-
+    // init을 실행하여 버튼마다 이벤트부여하고, paint를 실행시켜서 초기값(dataModel.display의 0 값을 보여주기)
     init();
 })()
